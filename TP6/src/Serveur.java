@@ -46,7 +46,7 @@ public class Serveur implements Runnable{
 			                  Socket client = server.accept();
 			                  
 			                  //Une fois reçue, on la traite dans un thread séparé
-			                  System.out.println("Connexion cliente reçue.");                  
+			                  //System.out.println("Connexion cliente reçue.");                  
 			                  Thread t = new Thread(new ClientProcessor(client));
 			                  t.start();
 			                  
@@ -82,7 +82,7 @@ public class Serveur implements Runnable{
 			                  Socket client = server.accept();
 			                  
 			                  //Une fois reçue, on la traite dans un thread séparé
-			                  System.out.println("Connexion cliente reçue.");                  
+			                  //System.out.println("Connexion cliente reçue.");                  
 			                  Thread t = new Thread(new ClientProcessor(client));
 			                  t.start();
 			                  

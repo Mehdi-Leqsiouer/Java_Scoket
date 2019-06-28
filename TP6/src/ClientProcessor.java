@@ -20,7 +20,7 @@ public class ClientProcessor implements Runnable{
    
    //Le traitement lancé dans un thread séparé
    public void run(){
-      System.err.println("Lancement du traitement de la connexion cliente");
+     // System.err.println("Lancement du traitement de la connexion cliente");
 
       boolean closeConnexion = false;
       //tant que la connexion est active, on traite les demandes
@@ -70,7 +70,7 @@ public class ClientProcessor implements Runnable{
             writer.flush();
             
             if(closeConnexion){
-               System.err.println("COMMANDE CLOSE DETECTEE ! ");
+               //System.err.println("COMMANDE CLOSE DETECTEE ! ");
                writer = null;
                reader = null;
                sock.close();

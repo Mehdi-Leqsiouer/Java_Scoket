@@ -19,11 +19,12 @@ public class Client implements Runnable{
    ArrayList <Long> tableRes = new ArrayList<Long>();
    long total = 0;
    int totalCount = 16000000;
-   int numWorkers = 5;
+   int numWorkers;
    
-   public Client(String host, int port[]){
+   public Client(String host, int port[],int numWorkers){
       name += count;
-      connexion = new Socket[5];
+      this.numWorkers = numWorkers;
+      connexion = new Socket[numWorkers];
       try {    	  
     	  for (int i = 0; i< port.length;i++){
     		  connexion[i] = new Socket(host, port[i]);
@@ -42,13 +43,14 @@ public class Client implements Runnable{
 
       //nous n'allons faire que 10 demandes par thread...
 
-         try {
+        /* try {
             Thread.currentThread().sleep(1000);
          } catch (InterruptedException e) {
             e.printStackTrace();
-         }
+         }*/
+         long startTime = System.currentTimeMillis();
          try {
-
+        	 
             for(int i = 0; i< connexion.length;i++ ){
             writer = new PrintWriter(connexion[i].getOutputStream(), true);
             reader = new BufferedInputStream(connexion[i].getInputStream());
@@ -63,17 +65,19 @@ public class Client implements Runnable{
            // System.out.println("Commande " + commande + " envoyée au serveur");
             
             //On attend la réponse
+            	
             String response = read();
-            System.out.println("\t * " + name + " : Réponse reçue " + response);
+            
+            //System.out.println("\t * " + name + " : Réponse reçue " + response);
             tableRes.add(Long.parseLong(response));
             
         
          
-         try {
+         /*try {
             Thread.currentThread().sleep(1000);
          } catch (InterruptedException e) {
             e.printStackTrace();
-         }
+         }*/
 
       
       writer.write("CLOSE");
@@ -81,6 +85,7 @@ public class Client implements Runnable{
       writer.close();
          
          }
+            
          } catch (IOException e1) {
              e1.printStackTrace();
           }
@@ -88,8 +93,11 @@ public class Client implements Runnable{
       for (int i = 0; i < tableRes.size();i++){
    	 	  total += tableRes.get(i);
    	   }
-      double pi = 4.0* total/ totalCount/5;
+      double pi = 4.0* total/ totalCount/numWorkers;
+      long stopTime = System.currentTimeMillis();	
       System.out.println("Pi:" + pi);
+      System.out.println("Time Duration: " + (stopTime - startTime) + "ms");
+      System.out.println("Erreur relative : "+Math.abs(pi - Math.PI) / Math.PI);
    }
 
    
