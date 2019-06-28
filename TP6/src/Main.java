@@ -5,8 +5,8 @@ public class Main {
 
    public static void main(String[] args) {
     
-      String host = "192.168.0.136";
-      int port[] = {700,701,702,703,704,705} ;
+      String host = "192.168.0.135";
+      int port[] = {700,701,702,703,704} ;
       
       
       

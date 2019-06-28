@@ -25,7 +25,7 @@ public class Client implements Runnable{
       name += count;
       connexion = new Socket[5];
       try {    	  
-    	  for (int i = 0; i< port.length-1;i++){
+    	  for (int i = 0; i< port.length;i++){
     		  connexion[i] = new Socket(host, port[i]);
     	  }
     		  
